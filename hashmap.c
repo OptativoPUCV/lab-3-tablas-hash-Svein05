@@ -54,7 +54,6 @@ void enlarge(HashMap * map) {
 HashMap * createMap(long capacity) {
 
     HashMap* newMapa = (HashMap *) calloc(capacity, sizeof(HashMap));
-    if (newMapa == NULL) return EXIT_FAILURE;
 
     newMapa->capacity = capacity;
     newMapa->current = -1;
