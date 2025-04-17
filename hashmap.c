@@ -46,9 +46,9 @@ int get_valid_location(HashMap* map, char* key)
         return posicionValida;
     else
     {
-        while(map->buckets[posicionValida] != NULL)
+        while(map->buckets[posicionValida] != NULL && map->buckets[posicionValida]->key != NULL)
         {
-            posicionValida++;
+            posicionValida = (posicionValida + 1) % map->capacity;
         }
         return posicionValida;
     }
@@ -58,7 +58,7 @@ void insertMap(HashMap * map, char * key, void * value) {
 
     int posicion_a_insertar = get_valid_location(map, key);
     Pair* newElemento = (Pair*) malloc(sizeof(Pair));
-    if (newElemento == NULL) return EXIT_FAILURE;
+    if (newElemento == NULL) return;
 
     newElemento->key = key;
     newElemento->value = value;
