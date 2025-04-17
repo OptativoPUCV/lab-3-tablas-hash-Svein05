@@ -38,9 +38,38 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
+int get_valid_location(HashMap* map, char* key)
+{
+    int posicionValida = hash(key, map->capacity);
+
+    if (map->buckets[posicionValida] == NULL)
+        return posicionValida;
+    else
+    {
+        while(map->buckets[posicionValida] != NULL)
+        {
+            posicionValida++;
+        }
+        return posicionValida;
+    }
+}
 
 void insertMap(HashMap * map, char * key, void * value) {
 
+    float porOcupado = (float) map->size/map->size;
+    if (porOcupado >= 0.7)
+    {
+        enlarge(map);
+    }
+
+    int posicion_a_insertar = get_valid_location(map, key);
+    Pair* newElemento = (Pair*) malloc(sizeof(Pair));
+    if (newElemento == NULL) return EXIT_FAILURE;
+
+    newElemento->key = key;
+    newElemento->value = value;
+    map->buckets[posicion_a_insertar] = newElemento;
+    map->size++;
 
 }
 
