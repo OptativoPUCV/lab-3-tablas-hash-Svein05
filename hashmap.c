@@ -56,12 +56,6 @@ int get_valid_location(HashMap* map, char* key)
 
 void insertMap(HashMap * map, char * key, void * value) {
 
-    float porOcupado = (float) map->size/map->size;
-    if (porOcupado >= 0.7)
-    {
-        enlarge(map);
-    }
-
     int posicion_a_insertar = get_valid_location(map, key);
     Pair* newElemento = (Pair*) malloc(sizeof(Pair));
     if (newElemento == NULL) return EXIT_FAILURE;
