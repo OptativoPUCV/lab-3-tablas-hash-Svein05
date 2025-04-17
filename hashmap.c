@@ -42,11 +42,11 @@ int get_valid_location(HashMap* map, char* key)
 {
     int posicionValida = hash(key, map->capacity);
 
-    if (map->buckets[posicionValida] == NULL)
+    if (map->buckets[posicionValida] == NULL || map->buckets[posicionValida]->key == NULL)
         return posicionValida;
     else
     {
-        while(map->buckets[posicionValida] != NULL)
+        while(map->buckets[posicionValida] != NULL || map->buckets[posicionValida]->key != NULL)
         {
             posicionValida++;
         }
