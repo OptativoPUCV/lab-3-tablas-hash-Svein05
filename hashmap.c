@@ -130,7 +130,13 @@ Pair * searchMap(HashMap * map,  char * key) {
 
 Pair * firstMap(HashMap * map) {
 
-    return NULL;
+    int pos = 0;
+    while (map->buckets[pos] == NULL || map->buckets[pos]->key == NULL)
+    {
+        if (pos == map->capacity) return NULL;
+        pos = (pos + 1) % map->capacity;
+    }
+    return pos;
 }
 
 Pair * nextMap(HashMap * map) {
