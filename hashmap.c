@@ -95,7 +95,9 @@ HashMap * createMap(long capacity) {
 
 void eraseMap(HashMap * map,  char * key) {    
 
-
+    Pair* bucket_eliminar = searchMap(map, key);
+    bucket_eliminar->key = NULL;
+    map->size--;
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
