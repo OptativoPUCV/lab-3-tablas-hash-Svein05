@@ -38,13 +38,13 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
-int get_valid_location(HashMap* map, char* key)
+int get_valid_location(HashMap* map, char* key) 
 {
     int posicionValida = hash(key, map->capacity);
 
     if (map->buckets[posicionValida] == NULL || map->buckets[posicionValida]->key == NULL)
         return posicionValida;
-    else
+    else 
     {
         while(map->buckets[posicionValida] != NULL && map->buckets[posicionValida]->key != NULL)
         {
@@ -100,8 +100,22 @@ void eraseMap(HashMap * map,  char * key) {
 
 Pair * searchMap(HashMap * map,  char * key) {   
 
-
-    return NULL;
+    int pos = hash(key, map->capacity);
+    if (map->buckets[pos] == key)
+    {
+        map->current = pos;
+        return map->buckets[pos];
+    }
+    else
+    {
+        while (map->buckets[pos] != key)
+        {
+            if (map->buckets[pos] == NULL) return NULL;
+            
+            pos = (pos + 1) % map->capacity;
+        }
+        return pos;
+    }
 }
 
 Pair * firstMap(HashMap * map) {
